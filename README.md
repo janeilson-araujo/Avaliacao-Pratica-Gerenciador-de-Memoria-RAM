@@ -1,0 +1,1 @@
+# Avalia-o-Pr-tica-Gerenciador-de-Mem-ria-RAM
