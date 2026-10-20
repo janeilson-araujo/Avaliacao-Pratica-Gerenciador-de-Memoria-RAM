@@ -39,17 +39,24 @@ int main()
 
             break;
         case 2:
+            printf("\nInforme o identificador do bloco: ");
+            scanf("%d",&id);
+
+            liberarMemoria(id);
 
             break;
         case 3:
 
+            exibirMemoria();
+
             break;
         case 4:
+            resumoMemoria();
 
             break;
         case 0:
 
-            void liberarTodasMemorias();
+            liberarTodasMemorias();
             return 0;
         }
     }

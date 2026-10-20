@@ -64,23 +64,23 @@ void alocarMemoria(size_t tamanho)
 
 void liberarMemoria(int id)
 {
-    if (id <= 0 || (size_t)id > tam_vet || vet_memoria[(size_t)id - 1] == NULL)
+    if (id <= 0 || id > tam_vet || vet_memoria[id - 1] == NULL)
     {
         printf("Erro ao acessar memoria.\n");
         return;
     }
 
-    if (vet_memoria[(size_t)id - 1]->ocupado == 0)
+    if (vet_memoria[id - 1]->ocupado == 0)
     {
         printf("Bloco de memoria já liberado\n");
         return;
     }
 
-    free(vet_memoria[(size_t)id - 1]->p);
-    vet_memoria[(size_t)id - 1]->p = NULL;
-    vet_memoria[(size_t)id - 1]->ocupado = 0;
+    free(vet_memoria[id - 1]->p);
+    vet_memoria[id - 1]->p = NULL;
+    vet_memoria[id - 1]->ocupado = 0;
 
-    printf("Memoria Liberada\n");
+    printf("bloco %d liberado com sucesso\n",id);
 }
 
 void exibirMemoria()
