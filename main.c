@@ -21,8 +21,15 @@ int main()
         do
         {
             printf("Escolha uma opção: ");
-            scanf("%d", &opcao);
-            getchar();
+            if (scanf("%d", &opcao) != 1)
+            {
+                limparEntrada();
+                opcao = -1;
+            }
+            else
+            {
+                limparEntrada();
+            }
             if (opcao < 0 || opcao > 4)
             {
                 printf("Opção inválida. Por favor, digite um número entre 0 e 7.\n");
@@ -33,14 +40,26 @@ int main()
         {
         case 1:
             printf("\nInforme o tamanho do bloco em bytes: ");
-            scanf("%zu",&quant_bytes);
+            if (scanf("%zu", &quant_bytes) != 1)
+            {
+                limparEntrada();
+                printf("Entrada inválida.\n");
+                break;
+            }
+            limparEntrada();
 
             alocarMemoria(quant_bytes);
 
             break;
         case 2:
             printf("\nInforme o identificador do bloco: ");
-            scanf("%d",&id);
+            if (scanf("%d", &id) != 1)
+            {
+                limparEntrada();
+                printf("Entrada inválida.\n");
+                break;
+            }
+            limparEntrada();
 
             liberarMemoria(id);
 

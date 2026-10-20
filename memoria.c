@@ -144,3 +144,9 @@ void liberarTodasMemorias()
     vet_memoria = NULL;
     tam_vet = 0;
 }
+
+void limparEntrada()
+{
+    int caractere;
+    while ((caractere = getchar()) != '\n' && caractere != EOF){}
+}
