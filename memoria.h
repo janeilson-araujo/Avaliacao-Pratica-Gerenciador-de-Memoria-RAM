@@ -7,4 +7,8 @@ void alocarMemoria(size_t tamanho);
 
 void liberarMemoria(int id);
 
+void exibirMemoria();
+
+void resumoMemoria();
+
 #endif

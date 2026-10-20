@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include "memoria.h"
 
-typedef int* ponteiro;
+typedef void *endereco;
 
 typedef struct memoria
 {
     int id;
-    ponteiro p;
+    endereco p;
     int ocupado;
     size_t tamanho;
 } memoria, *Pmemoria;
@@ -75,4 +75,26 @@ void liberarMemoria(int id)
     vet_memoria[id - 1]->ocupado = 0;
 
     printf("Memoria Liberada\n");
+}
+
+void exibirMemoria()
+{
+    printf("ID    ENDEREÇO    TAMANHO    ESTADO");
+    for (int i = 0;i < tam_vet;i++){
+        printf("%d  ",vet_memoria[i]->id);
+        printf("%p  ",vet_memoria[i]->p);
+        printf("%d  ",vet_memoria[i]->tamanho);
+        if (vet_memoria[i]->ocupado == 1)
+        {
+            printf("OCUPADO\n");
+        } else {
+            printf("LIVRE\n");
+        }
+        
+    }
+}
+
+void resumoMemoria()
+{
+    
 }
