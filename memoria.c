@@ -2,6 +2,13 @@
 #include <stdio.h>
 #include "memoria.h"
 
+typedef struct memoria
+{
+    int id;
+    int ocupado;
+    size_t tamanho;
+} memoria, *Pmemoria;
+
 size_t tam_vet = 0;
 Pmemoria *vet_memoria = NULL;
 

@@ -3,12 +3,6 @@
 
 #include <stddef.h>
 
-typedef struct memoria {
-    int id;
-    int ocupado;
-    size_t tamanho;
-} memoria, *Pmemoria;
-
 void alocarMemoria(size_t tamanho);
 
 void liberarMemoria(int id);
