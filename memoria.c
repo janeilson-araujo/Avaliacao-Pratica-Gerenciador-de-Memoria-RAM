@@ -6,7 +6,7 @@ typedef void *endereco;
 
 typedef struct memoria
 {
-    int id;
+    size_t id;
     endereco p;
     int ocupado;
     size_t tamanho;
@@ -58,33 +58,33 @@ void alocarMemoria(size_t tamanho)
 
 void liberarMemoria(int id)
 {
-    if (id <= 0 || (size_t)id > tam_vet || vet_memoria[id - 1] == NULL)
+    if (id <= 0 || (size_t)id > tam_vet || vet_memoria[(size_t)id - 1] == NULL)
     {
         printf("Erro ao acessar memoria.\n");
         return;
     }
 
-    if (vet_memoria[id - 1]->ocupado == 0)
+    if (vet_memoria[(size_t)id - 1]->ocupado == 0)
     {
         printf("Bloco de memoria já liberado\n");
         return;
     }
 
-    free(vet_memoria[id - 1]->p);
-    vet_memoria[id - 1]->p = NULL;
-    vet_memoria[id - 1]->ocupado = 0;
+    free(vet_memoria[(size_t)id - 1]->p);
+    vet_memoria[(size_t)id - 1]->p = NULL;
+    vet_memoria[(size_t)id - 1]->ocupado = 0;
 
     printf("Memoria Liberada\n");
 }
 
 void exibirMemoria()
 {
-    printf("ID    ENDEREÇO    TAMANHO    ESTADO");
-    for (int i = 0; i < tam_vet; i++)
+    printf("ID    ENDERECO    TAMANHO    ESTADO\n");
+    for (size_t i = 0; i < tam_vet; i++)
     {
-        printf("%d  ", vet_memoria[i]->id);
+        printf("%zu  ", vet_memoria[i]->id);
         printf("%p  ", vet_memoria[i]->p);
-        printf("%d  ", vet_memoria[i]->tamanho);
+        printf("%zu  ", vet_memoria[i]->tamanho);
         if (vet_memoria[i]->ocupado == 1)
         {
             printf("OCUPADO\n");
@@ -98,27 +98,42 @@ void exibirMemoria()
 
 void resumoMemoria()
 {
-    int blocosRegistros = tam_vet;
-    int blocosOcupados = 0;
-    int blocosLivres = 0;
-    int totalBytes = 0;
+    size_t blocosRegistros = tam_vet;
+    size_t blocosOcupados = 0;
+    size_t blocosLivres = 0;
+    size_t totalBytes = 0;
 
-    for (int i = 0; i < tam_vet; i++)
+    for (size_t i = 0; i < tam_vet; i++)
     {
         if (vet_memoria[i]->ocupado == 1)
         {
             blocosOcupados = blocosOcupados + 1;
+            totalBytes = totalBytes + vet_memoria[i]->tamanho;
         }
         else
         {
             blocosLivres = blocosLivres + 1;
         }
-
-        totalBytes = totalBytes + vet_memoria[i]->tamanho;
-
-        printf("Total de registros: %d\n", blocosRegistros);
-        printf("Blocos ocupados: %d\n" , blocosOcupados);
-        printf("Blocos livres: %d\n", blocosLivres);
-        printf("Bytes atualmente alocados: %d\n", totalBytes);
     }
+
+    printf("Total de registros: %zu\n", blocosRegistros);
+    printf("Blocos ocupados: %zu\n", blocosOcupados);
+    printf("Blocos livres: %zu\n", blocosLivres);
+    printf("Bytes atualmente alocados: %zu\n", totalBytes);
+}
+
+void liberarTodasMemorias()
+{
+    for (size_t i = 0; i < tam_vet; i++)
+    {
+        if (vet_memoria[i] != NULL)
+        {
+            free(vet_memoria[i]->p);
+            free(vet_memoria[i]);
+        }
+    }
+
+    free(vet_memoria);
+    vet_memoria = NULL;
+    tam_vet = 0;
 }
