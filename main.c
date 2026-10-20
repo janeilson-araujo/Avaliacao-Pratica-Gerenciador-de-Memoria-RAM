@@ -6,6 +6,8 @@
 int main()
 {
     int opcao;
+    int id;
+    size_t quant_bytes;
 
     printf("========== GERENCIADOR DE MEMÓRIA ==========\n");
     printf("1 - Alocar bloco de memória\n");
@@ -18,7 +20,7 @@ int main()
     {
         do
         {
-            printf("Digite sua opção: ");
+            printf("Escolha uma opção: ");
             scanf("%d", &opcao);
             getchar();
             if (opcao < 0 || opcao > 4)
@@ -30,13 +32,15 @@ int main()
         switch (opcao)
         {
         case 1:
-            /* code */
-            break;
+            printf("\nInforme o tamanho do bloco em bytes: ");
+            scanf("%zu",&quant_bytes);
 
+            alocarMemoria(quant_bytes);
+
+            break;
         case 2:
 
             break;
-
         case 3:
 
             break;

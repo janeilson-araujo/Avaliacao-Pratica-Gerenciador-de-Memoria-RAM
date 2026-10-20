@@ -2,16 +2,6 @@
 #include <stdio.h>
 #include "memoria.h"
 
-typedef void *endereco;
-
-typedef struct memoria
-{
-    size_t id;
-    endereco p;
-    int ocupado;
-    size_t tamanho;
-} memoria, *Pmemoria;
-
 size_t tam_vet = 0;
 Pmemoria *vet_memoria = NULL;
 
@@ -50,10 +40,26 @@ void alocarMemoria(size_t tamanho)
         return;
     }
 
+    printf("Bloco alocado com sucesso!\n");
+
     vet_memoria[tam_vet]->id = tam_vet + 1;
     vet_memoria[tam_vet]->ocupado = 1;
     vet_memoria[tam_vet]->tamanho = tamanho;
     tam_vet++;
+
+    printf("Identificador: %d\n", vet_memoria[tam_vet]->id);
+    printf("Endereço: %p\n", vet_memoria[tam_vet]->p);
+    printf("Tamanho: %zu bytes\n", vet_memoria[tam_vet]->tamanho);
+    printf("Estado: ");
+    if (vet_memoria[tam_vet]->ocupado == 1)
+    {
+        printf("OCUPADO\n");
+    }
+    else
+    {
+        printf("LIVRE\n");
+    }
+    printf("\n");
 }
 
 void liberarMemoria(int id)
