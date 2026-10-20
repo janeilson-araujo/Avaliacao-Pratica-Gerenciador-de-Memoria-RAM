@@ -45,7 +45,6 @@ void alocarMemoria(size_t tamanho)
     vet_memoria[tam_vet]->id = tam_vet + 1;
     vet_memoria[tam_vet]->ocupado = 1;
     vet_memoria[tam_vet]->tamanho = tamanho;
-    tam_vet++;
 
     printf("Identificador: %d\n", vet_memoria[tam_vet]->id);
     printf("Endereço: %p\n", vet_memoria[tam_vet]->p);
@@ -60,6 +59,8 @@ void alocarMemoria(size_t tamanho)
         printf("LIVRE\n");
     }
     printf("\n");
+
+    tam_vet++;
 }
 
 void liberarMemoria(int id)
@@ -88,7 +89,7 @@ void exibirMemoria()
     printf("ID    ENDERECO    TAMANHO    ESTADO\n");
     for (size_t i = 0; i < tam_vet; i++)
     {
-        printf("%zu  ", vet_memoria[i]->id);
+        printf("%d  ", vet_memoria[i]->id);
         printf("%p  ", vet_memoria[i]->p);
         printf("%zu  ", vet_memoria[i]->tamanho);
         if (vet_memoria[i]->ocupado == 1)
