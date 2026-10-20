@@ -11,4 +11,6 @@ void exibirMemoria();
 
 void resumoMemoria();
 
+void liberarTodasMemorias();
+
 #endif
