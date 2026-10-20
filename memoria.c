@@ -80,21 +80,45 @@ void liberarMemoria(int id)
 void exibirMemoria()
 {
     printf("ID    ENDEREÇO    TAMANHO    ESTADO");
-    for (int i = 0;i < tam_vet;i++){
-        printf("%d  ",vet_memoria[i]->id);
-        printf("%p  ",vet_memoria[i]->p);
-        printf("%d  ",vet_memoria[i]->tamanho);
+    for (int i = 0; i < tam_vet; i++)
+    {
+        printf("%d  ", vet_memoria[i]->id);
+        printf("%p  ", vet_memoria[i]->p);
+        printf("%d  ", vet_memoria[i]->tamanho);
         if (vet_memoria[i]->ocupado == 1)
         {
             printf("OCUPADO\n");
-        } else {
+        }
+        else
+        {
             printf("LIVRE\n");
         }
-        
     }
 }
 
 void resumoMemoria()
 {
-    
+    int blocosRegistros = tam_vet;
+    int blocosOcupados = 0;
+    int blocosLivres = 0;
+    int totalBytes = 0;
+
+    for (int i = 0; i < tam_vet; i++)
+    {
+        if (vet_memoria[i]->ocupado == 1)
+        {
+            blocosOcupados = blocosOcupados + 1;
+        }
+        else
+        {
+            blocosLivres = blocosLivres + 1;
+        }
+
+        totalBytes = totalBytes + vet_memoria[i]->tamanho;
+
+        printf("Total de registros: %d\n", blocosRegistros);
+        printf("Blocos ocupados: %d\n" , blocosOcupados);
+        printf("Blocos livres: %d\n", blocosLivres);
+        printf("Bytes atualmente alocados: %d\n", totalBytes);
+    }
 }
