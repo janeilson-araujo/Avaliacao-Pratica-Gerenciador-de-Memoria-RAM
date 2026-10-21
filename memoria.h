@@ -1,5 +1,5 @@
-#ifndef __MEMORIA_H__
-#define __MEMORIA_H__
+#ifndef MEMORIA_H
+#define MEMORIA_H
 
 typedef void *endereco;
 

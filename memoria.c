@@ -86,12 +86,26 @@ void liberarMemoria(int id)
 
 void exibirMemoria()
 {
-    printf("ID    ENDERECO    TAMANHO    ESTADO\n");
+    printf("ID    ENDEREÇO        TAMANHO      ESTADO\n");
     for (size_t i = 0; i < tam_vet; i++)
     {
+        // 1. Imprime o ID
         printf("%d  ", vet_memoria[i]->id);
-        printf("%p  ", vet_memoria[i]->p);
-        printf("%zu  ", vet_memoria[i]->tamanho);
+        
+        // 2. Lógica condicional para o endereço: exibe o ponteiro apenas se estiver ocupado
+        if (vet_memoria[i]->ocupado == 1)
+        {
+            printf("%p  ", vet_memoria[i]->p);
+        }
+        else
+        {
+            printf("(liberado)  ");
+        }
+        
+        // 3. Imprime o tamanho (com a palavra "bytes" conforme o edital)
+        printf("%zu bytes  ", vet_memoria[i]->tamanho);
+        
+        // 4. Imprime o estado final
         if (vet_memoria[i]->ocupado == 1)
         {
             printf("OCUPADO\n");
