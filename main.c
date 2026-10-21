@@ -32,7 +32,7 @@ int main()
             }
             if (opcao < 0 || opcao > 4)
             {
-                printf("Opção inválida. Por favor, digite um número entre 0 e 7.\n");
+                printf("Opção inválida. Por favor, digite um número entre 0 e 4.\n");
             }
         } while (opcao < 0 || opcao > 4);
 
