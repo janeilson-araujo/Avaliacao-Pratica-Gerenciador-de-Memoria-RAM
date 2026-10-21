@@ -1,6 +1,8 @@
 #ifndef MEMORIA_H
 #define MEMORIA_H
 
+#include <stddef.h>
+
 typedef void *endereco;
 
 typedef struct memoria
