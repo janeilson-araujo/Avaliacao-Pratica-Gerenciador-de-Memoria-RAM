@@ -10,6 +10,7 @@ int main()
     size_t quant_bytes;
     int tamanho_temp;
     char term;
+    int lidos;
 
     printf("========== GERENCIADOR DE MEMÓRIA ==========\n");
     printf("1 - Alocar bloco de memória\n");
@@ -24,7 +25,16 @@ int main()
         {
             printf("\nEscolha uma opção: ");
             
-            if (scanf("%d%c", &opcao, &term) != 2 || term != '\n')
+            lidos = scanf("%d%c", &opcao, &term);
+            
+            if (lidos == EOF)
+            {
+                printf("\n\nFim de entrada (EOF) detectado. Encerrando...\n");
+                liberarTodasMemorias();
+                return 0;
+            }
+
+            if (lidos != 2 || term != '\n')
             {
                 limparEntrada();
                 opcao = -1;
@@ -41,7 +51,15 @@ int main()
         case 1:
             printf("\nInforme o tamanho do bloco em bytes: ");
             
-            if (scanf("%d%c", &tamanho_temp, &term) != 2 || term != '\n')
+            lidos = scanf("%d%c", &tamanho_temp, &term);
+            if (lidos == EOF)
+            {
+                printf("\nFim de entrada (EOF) detectado. Encerrando...\n");
+                liberarTodasMemorias();
+                return 0;
+            }
+
+            if (lidos != 2 || term != '\n')
             {
                 limparEntrada();
                 printf("Erro: Entrada inválida. Digite apenas números inteiros.\n");
@@ -56,13 +74,20 @@ int main()
             
             quant_bytes = (size_t)tamanho_temp;
             alocarMemoria(quant_bytes);
-
             break;
 
         case 2:
             printf("\nInforme o identificador do bloco: ");
             
-            if (scanf("%d%c", &id, &term) != 2 || term != '\n')
+            lidos = scanf("%d%c", &id, &term);
+            if (lidos == EOF)
+            {
+                printf("\nFim de entrada (EOF) detectado. Encerrando...\n");
+                liberarTodasMemorias();
+                return 0;
+            }
+
+            if (lidos != 2 || term != '\n')
             {
                 limparEntrada();
                 printf("Erro: Entrada inválida. Digite apenas números inteiros.\n");
@@ -70,7 +95,6 @@ int main()
             }
 
             liberarMemoria(id);
-
             break;
 
         case 3:

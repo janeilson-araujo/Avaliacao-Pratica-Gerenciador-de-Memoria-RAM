@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "memoria.h"
 
-size_t tam_vet = 0;
+int tam_vet = 0;
 Pmemoria *vet_memoria = NULL;
 
 void alocarMemoria(size_t tamanho)
@@ -42,6 +42,7 @@ void alocarMemoria(size_t tamanho)
 
     printf("Bloco alocado com sucesso!\n");
 
+    // Atribuição direta, sem necessidade de cast
     vet_memoria[tam_vet]->id = tam_vet + 1;
     vet_memoria[tam_vet]->ocupado = 1;
     vet_memoria[tam_vet]->tamanho = tamanho;
@@ -65,7 +66,7 @@ void alocarMemoria(size_t tamanho)
 
 void liberarMemoria(int id)
 {
-    if (id <= 0 || (size_t)id > tam_vet || vet_memoria[id - 1] == NULL)
+    if (id <= 0 || id > tam_vet || vet_memoria[id - 1] == NULL)
     {
         printf("Erro ao acessar memoria.\n");
         return;
@@ -87,12 +88,10 @@ void liberarMemoria(int id)
 void exibirMemoria()
 {
     printf("ID    ENDEREÇO        TAMANHO      ESTADO\n");
-    for (size_t i = 0; i < tam_vet; i++)
+    for (int i = 0; i < tam_vet; i++) // Variável de controle 'i' alterada para int
     {
-        // 1. Imprime o ID
         printf("%d  ", vet_memoria[i]->id);
         
-        // 2. Lógica condicional para o endereço: exibe o ponteiro apenas se estiver ocupado
         if (vet_memoria[i]->ocupado == 1)
         {
             printf("%p  ", vet_memoria[i]->p);
@@ -102,10 +101,8 @@ void exibirMemoria()
             printf("(liberado)  ");
         }
         
-        // 3. Imprime o tamanho (com a palavra "bytes" conforme o edital)
         printf("%zu bytes  ", vet_memoria[i]->tamanho);
         
-        // 4. Imprime o estado final
         if (vet_memoria[i]->ocupado == 1)
         {
             printf("OCUPADO\n");
@@ -119,12 +116,12 @@ void exibirMemoria()
 
 void resumoMemoria()
 {
-    size_t blocosRegistros = tam_vet;
-    size_t blocosOcupados = 0;
-    size_t blocosLivres = 0;
+    int blocosRegistros = tam_vet; 
+    int blocosOcupados = 0;
+    int blocosLivres = 0;
     size_t totalBytes = 0;
 
-    for (size_t i = 0; i < tam_vet; i++)
+    for (int i = 0; i < tam_vet; i++)
     {
         if (vet_memoria[i]->ocupado == 1)
         {
@@ -137,15 +134,15 @@ void resumoMemoria()
         }
     }
 
-    printf("Total de registros: %zu\n", blocosRegistros);
-    printf("Blocos ocupados: %zu\n", blocosOcupados);
-    printf("Blocos livres: %zu\n", blocosLivres);
+    printf("Total de registros: %d\n", blocosRegistros);
+    printf("Blocos ocupados: %d\n", blocosOcupados);
+    printf("Blocos livres: %d\n", blocosLivres);
     printf("Bytes atualmente alocados: %zu\n", totalBytes);
 }
 
 void liberarTodasMemorias()
 {
-    for (size_t i = 0; i < tam_vet; i++)
+    for (int i = 0; i < tam_vet; i++)
     {
         if (vet_memoria[i] != NULL)
         {
